@@ -13,6 +13,7 @@ jobs:
   build-and-push-docker:
     runs-on: ubuntu-latest
 
+    # Só executa se o workflow "code_check_ci" for bem-sucedido
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
@@ -26,6 +27,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Extract Git commit hash
+        id: extract_version
+        run: echo "DOCKER_IMAGE_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Build and push image to DockerHub
         uses: docker/build-push-action@v4
