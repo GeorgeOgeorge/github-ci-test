@@ -11,4 +11,4 @@ test:
 	pytest
 
 get-image-version:
-	echo "DOCKER_IMAGE_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+	echo "DOCKER_IMAGE_VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV 
