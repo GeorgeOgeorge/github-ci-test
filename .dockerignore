@@ -1,5 +1,4 @@
 Dockerrun.aws.json
-./Makefile
 ./.gitignore
 ./.github/
 ./.git/
