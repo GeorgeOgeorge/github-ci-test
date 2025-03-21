@@ -13,6 +13,8 @@ jobs:
   build-and-push-docker:
     runs-on: ubuntu-latest
 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -24,10 +26,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-
-      - name: Extract Docker image version
-        id: extract_version
-        run: make get-image-version
 
       - name: Build and push image to DockerHub
         uses: docker/build-push-action@v4
